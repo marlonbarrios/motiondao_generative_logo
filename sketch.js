@@ -6,7 +6,8 @@ let settings = {
   rotationSpeed: 156,
   red: 255,
   green: 0,
-  blue: 0
+  blue: 0,
+  randomColors: false
 
 }
 
@@ -20,11 +21,12 @@ function setup() {
 
   gui = new dat.GUI();
   gui.add(settings, 'numberLines', 1, 167).name("Number of lines")
-//  gui.add(settings, 'rounding', 10, 200).name("Rounding")
  gui.add(settings, 'rotationSpeed', 50, 300).name("Rotation Speed")
+ gui.add(settings, 'randomColors', true, false).name("Random Colors Changes")
  gui.add(settings, 'red', 0, 255).name("Red")
  gui.add(settings, 'green', 0, 255).name("Green")
  gui.add(settings, 'blue', 0, 255).name("Blue")
+
 
 
 
@@ -44,13 +46,17 @@ for (var i = 0; i < settings.numberLines; i++) {
 push()
 rotate(sin(frameCount + i ) * settings.rotationSpeed)
 
-var r =  settings.red
-var g =  settings.green
-var b =  settings.blue
 
-// var r =  map(sin(frameCount), -1, 1, 50, 255)
-// var g =  map(cos(frameCount / 2), -1, 1,50 , 255)
-// var b =  map(sin(frameCount /  4), -1 ,1, 50, 255)
+
+if (settings.randomColors == true) {
+var r =  map(sin(frameCount), -1, 1, 50, 255)
+var g =  map(cos(frameCount / 2), -1, 1,50 , 255)
+var b =  map(sin(frameCount /  4), -1 ,1, 50, 255)
+} else {
+  var r =  settings.red
+  var g =  settings.green
+  var b =  settings.blue
+}
 
 stroke(r,g,b, 200);
 
